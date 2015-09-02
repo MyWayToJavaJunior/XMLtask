@@ -3,9 +3,9 @@
 targetNamespace="http://www.w3schools.com"
 xmlns="http://www.w3schools.com"
 elementFormDefault="qualified">
-<xs:element name="dance" type="dancetype"/>
+<xs:element name="dance" type="perfomance"/>
 
-<xs:complexType name="dancetype">
+<xs:complexType name="perfomance">
 	<xs:sequence>
 		<xs:element name="typeofdance">
 		  <xs:simpleType>
