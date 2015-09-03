@@ -14,7 +14,8 @@
             <xs:element name="DanceType" type="TypeOfDance" /> <!-- Type of dance, for example: folk, pop -->
             <xs:element name="SceneType" type="TypeOfScene" /> <!-- Type of scene, for example: assembly hall, outdoor playground -->
             <xs:element name="MusicType" type="TypeOfMusic" /> <!-- Type of music, for example: phonogram, live music -->
-            <xs:element name="DancersType" type="Dancers" />
+            <xs:element name="DanceGroup" type="DanceGroup" minOccurs="0" maxOccurs="1" />
+            <xs:element name="DancersType" type="NumberOfDancers" />
         </xs:sequence>
         <xs:attribute name="DanceID" type="xs:ID" use="required" />
     </xs:complexType>
@@ -46,30 +47,16 @@
 
     <xs:complexType name="NumberOfDancers">
         <xs:choice>
-            <xs:group ref="DancersGroup" />
-        </xs:choice>
-    </xs:complexType>
-
-    <xs:group name="DancersGroup">
-        <xs:sequence>
             <xs:element name="Mass" type="MassType" />
             <xs:element name="Solo" type="SoloType" />
             <xs:element name="Pair" type="PairType" />
-        </xs:sequence>
-    </xs:group>
-
-    <xs:complexType name="Dancers">
-        <xs:sequence>
-            <xs:element name="DanceGroup" type="DanceGroup" minOccurs="0" maxOccurs="1" />
-            <xs:element name="DancersNumber" type="NumberOfDancers" />
-        </xs:sequence>
+        </xs:choice>
     </xs:complexType>
 
     <xs:complexType name="DanceGroup">
         <xs:sequence>
             <xs:element name="DanceGroupName" type="NameOfDanceGroup" />
             <xs:element name="DanceGroupAge" type="AgeOfDanceGroup" />
-            <xs:element name="Dancers" type="Dancers" />
         </xs:sequence>
     </xs:complexType>
 

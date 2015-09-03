@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class XSDValidatorOfDanceTest {
 
     private static final String VALID_XML = ".\\src\\main\\resources\\Dance.xml";
-    private static final String INVALID_XML = ".\\src\\main\\resources\\Dance1.xml";
+    private static final String INVALID_XML = ".\\src\\main\\resources\\AnyDance.xml";
     private static final String SCHEME = ".\\src\\main\\resources\\xmldance.xsd";
 
     @Test
