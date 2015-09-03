@@ -14,7 +14,7 @@
             <xs:element name="DanceType" type="TypeOfDance" /> <!-- Type of dance, for example: folk, pop -->
             <xs:element name="SceneType" type="TypeOfScene" /> <!-- Type of scene, for example: assembly hall, outdoor playground -->
             <xs:element name="MusicType" type="TypeOfMusic" /> <!-- Type of music, for example: phonogram, live music -->
-            <xs:element name="DancersType" type="DanceOrDanceGroup" />
+            <xs:element name="DancersType" type="Dancers" />
         </xs:sequence>
         <xs:attribute name="DanceID" type="xs:ID" use="required" />
     </xs:complexType>
@@ -44,23 +44,23 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:complexType name="DanceOrDanceGroup">
+    <xs:complexType name="NumberOfDancers">
         <xs:choice>
-            <xs:element name="Dancers" type="Dancers" />
-            <xs:element name="DanceGroup" type="DanceGroup" />
+            <xs:group ref="DancersGroup" />
         </xs:choice>
     </xs:complexType>
 
-    <xs:complexType name="NumberOfDancers">
-        <xs:choice>
+    <xs:group name="DancersGroup">
+        <xs:sequence>
             <xs:element name="Mass" type="MassType" />
             <xs:element name="Solo" type="SoloType" />
             <xs:element name="Pair" type="PairType" />
-        </xs:choice>
-    </xs:complexType>
+        </xs:sequence>
+    </xs:group>
 
     <xs:complexType name="Dancers">
         <xs:sequence>
+            <xs:element name="DanceGroup" type="DanceGroup" minOccurs="0" maxOccurs="1" />
             <xs:element name="DancersNumber" type="NumberOfDancers" />
         </xs:sequence>
     </xs:complexType>
@@ -89,15 +89,23 @@
     </xs:complexType>
 
     <xs:complexType name="PairType">
-        <xs:sequence>
-            <xs:element name="Dancer" type="Dancer" minOccurs="2" maxOccurs="2" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="SoloType">
+                <xs:sequence>
+                    <xs:element name="Dancer" type="Dancer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="MassType">
-        <xs:sequence>
-            <xs:element name="Dancer" type="Dancer" minOccurs="3" maxOccurs="100" />
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="PairType">
+                <xs:sequence>
+                    <xs:element name="Dancer" type="Dancer" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:simpleType name="GenderOfDancer">
